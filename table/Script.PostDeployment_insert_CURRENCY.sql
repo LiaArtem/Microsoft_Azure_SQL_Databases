@@ -35,4 +35,22 @@ BEGIN
 	WHERE NOT EXISTS (SELECT 1 FROM [dbo].[CURRENCY] WHERE CODE = '826');
 
     commit transaction;
+
+    PRINT 'Добавление тестовых курсов валют' 
+    begin transaction;
+    
+    INSERT INTO [dbo].[KURS] ([KURS_DATE], [CURRENCY_CODE], [RATE], [FORC])
+    SELECT '2021-12-30','840', 24.15, 1
+	WHERE NOT EXISTS (SELECT 1 FROM [dbo].[KURS] WHERE [KURS_DATE] = '2021-12-30' AND [CURRENCY_CODE] = '840');
+
+    INSERT INTO [dbo].[KURS] ([KURS_DATE], [CURRENCY_CODE], [RATE], [FORC])
+    SELECT '2021-12-30','978', 26.15, 1
+	WHERE NOT EXISTS (SELECT 1 FROM [dbo].[KURS] WHERE [KURS_DATE] = '2021-12-30' AND [CURRENCY_CODE] = '978');
+
+    INSERT INTO [dbo].[KURS] ([KURS_DATE], [CURRENCY_CODE], [RATE], [FORC])
+    SELECT '2021-12-30','826', 36.15, 1
+	WHERE NOT EXISTS (SELECT 1 FROM [dbo].[KURS] WHERE [KURS_DATE] = '2021-12-30' AND [CURRENCY_CODE] = '826');
+
+    commit transaction;
+
 END
